@@ -258,6 +258,14 @@ return {
 			lsp = {
 				capabilities = capabilities,
 				on_attach = on_attach,
+				flags = { allow_incremental_sync = false },
+				settings = {
+					dart = {
+						completeFunctionCalls = true,
+						updateImportsOnRename = true,
+						showTodos = true,
+					},
+				},
 			},
 			debugger = {
 				enabled = true,
