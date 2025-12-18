@@ -7,6 +7,12 @@ return {
 				loadOutDirsFromCheck = true,
 				allFeatures = true,
 			},
+			procMacro = {
+				enable = true,
+				attributes = {
+					enable = true,
+				},
+			},
 		},
 	},
 }
