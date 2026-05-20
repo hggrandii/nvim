@@ -2,7 +2,7 @@ vim.pack.add({
   { src = "https://github.com/folke/snacks.nvim" },
   { src = "https://github.com/EdenEast/nightfox.nvim" },
   { src = "https://github.com/windwp/nvim-autopairs" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/christoomey/vim-tmux-navigator" },
 })
 
@@ -79,3 +79,33 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
+
+local parsers = {
+  "go",
+  "gomod",
+  "lua",
+  "rust",
+  "zig",
+  "c",
+  "cpp",
+  "dart",
+  "python",
+  "javascript",
+  "typescript",
+  "tsx",
+  "json",
+  "yaml",
+  "toml",
+  "bash",
+  "markdown",
+  "html",
+  "css",
+}
+
+vim.api.nvim_create_user_command("TSMine", function()
+  require("nvim-treesitter").install(parsers):wait(300000)
+end, {})
+
+vim.api.nvim_create_user_command("TSUpdateMine", function()
+  vim.cmd("TSUpdate " .. table.concat(parsers, " "))
+end, {})
