@@ -3,6 +3,9 @@ vim.g.netrw_liststyle = 3
 vim.cmd("syntax enable")
 vim.cmd("filetype plugin indent on")
 
+vim.opt.completeopt = { "menuone", "popup", "noinsert", "noselect", "fuzzy" }
+vim.opt.autocomplete = true
+
 
 local opt = vim.opt
 

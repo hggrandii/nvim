@@ -16,6 +16,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = event.buf
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 
+    if client and vim.bo[bufnr].buftype == "" then
+      vim.lsp.completion.enable(true, client.id, bufnr, {
+        autotrigger = true,
+      })
+    end
+
     if client and client.name == "clangd" then
       local ft = vim.bo[bufnr].filetype
 

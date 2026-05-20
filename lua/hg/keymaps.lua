@@ -67,6 +67,31 @@ if ok then
   end, { desc = "Toggle Explorer" })
 end
 
+keymap.set("i", "<C-j>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-n>"
+  end
+  return "<C-j>"
+end, { expr = true, desc = "Completion next item" })
+
+keymap.set("i", "<C-k>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-p>"
+  end
+  return "<C-k>"
+end, { expr = true, desc = "Completion previous item" })
+
+keymap.set("i", "<CR>", function()
+  return "<CR>"
+end, { expr = true, desc = "New line" })
+
+keymap.set("i", "<C-y>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-y>"
+  end
+  return "<C-y>"
+end, { expr = true, desc = "Accept completion" })
+
 local function smart_left()
   local ok, Snacks = pcall(require, "snacks")
   local ft = vim.bo.filetype
