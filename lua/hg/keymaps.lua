@@ -28,6 +28,9 @@ keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw" })
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
+keymap.set({ "i", "v", "s" }, "<C-c>", "<Esc>", { desc = "Escape" })
+
+
 keymap.set("n", "<leader>ef", function()
   local ok, Snacks = pcall(require, "snacks")
   if not ok then
@@ -121,3 +124,4 @@ local function smart_left()
     vim.cmd("wincmd h")
   end
 end
+

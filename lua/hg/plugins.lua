@@ -4,9 +4,13 @@ vim.pack.add({
   { src = "https://github.com/windwp/nvim-autopairs" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/christoomey/vim-tmux-navigator" },
+  { src = "https://github.com/kylechui/nvim-surround" },
 })
 
+
 require("nvim-treesitter").setup()
+
+require("nvim-surround").setup()
 
 require("nvim-autopairs").setup({
   check_ts = false,
@@ -23,6 +27,8 @@ require("snacks").setup({
     enabled = true,
     sources = {
       explorer = {
+        hidden = true,
+        ignored = true,
         auto_close = true,
         jump = { close = true },
         layout = { preset = "sidebar" },
