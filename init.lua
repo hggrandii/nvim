@@ -1,3 +1,5 @@
-require("hggrandii.core")
-require("hggrandii.lazy")
-
+require("hg.options")
+require("hg.plugins")
+require("hg.keymaps")
+require("hg.lsp")
+require("hg.dashboard")
