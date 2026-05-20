@@ -96,3 +96,15 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.autocomplete = false
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.autoindent = true
+    vim.opt_local.smartindent = false
+  end,
+})

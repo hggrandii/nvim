@@ -81,9 +81,28 @@ keymap.set("i", "<C-k>", function()
   return "<C-k>"
 end, { expr = true, desc = "Completion previous item" })
 
+-- keymap.set("i", "<CR>", function()
+--   return "<CR>"
+-- end, { expr = true, desc = "New line" })
+
+
+local ok_pairs, npairs = pcall(require, "nvim-autopairs")
+
 keymap.set("i", "<CR>", function()
-  return "<CR>"
-end, { expr = true, desc = "New line" })
+  if vim.fn.pumvisible() == 1 then
+    return vim.api.nvim_replace_termcodes("<C-e><CR>", true, false, true)
+  end
+
+  if ok_pairs then
+    return npairs.autopairs_cr()
+  end
+
+  return vim.api.nvim_replace_termcodes("<CR>", true, false, true)
+end, {
+  expr = true,
+  replace_keycodes = false,
+  desc = "New line with autopairs",
+})
 
 keymap.set("i", "<C-y>", function()
   if vim.fn.pumvisible() == 1 then

@@ -107,3 +107,27 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function(event)
+    local allowed = {
+      go = true,
+      lua = true,
+      rust = true,
+      zig = true,
+      c = true,
+      cpp = true,
+      dart = true,
+      python = true,
+    }
+
+    if not allowed[vim.bo[event.buf].filetype] then
+      return
+    end
+
+    vim.lsp.buf.format({
+      bufnr = event.buf,
+      timeout_ms = 3000,
+    })
+  end,
+})
