@@ -77,8 +77,3 @@ local function smart_left()
     vim.cmd("wincmd h")
   end
 end
-
-keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move left" })
-keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move right" })
-keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move down" })
-keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move up" })

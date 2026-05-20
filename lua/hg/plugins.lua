@@ -2,7 +2,11 @@ vim.pack.add({
   { src = "https://github.com/folke/snacks.nvim" },
   { src = "https://github.com/EdenEast/nightfox.nvim" },
   { src = "https://github.com/windwp/nvim-autopairs" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/christoomey/vim-tmux-navigator" },
 })
+
+require("nvim-treesitter").setup()
 
 require("nvim-autopairs").setup({
   check_ts = false,
@@ -66,4 +70,12 @@ make_transparent()
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = make_transparent,
+})
+
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    pcall(vim.treesitter.start)
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })

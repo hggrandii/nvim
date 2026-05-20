@@ -1,5 +1,9 @@
 vim.g.netrw_liststyle = 3
 
+vim.cmd("syntax enable")
+vim.cmd("filetype plugin indent on")
+
+
 local opt = vim.opt
 
 opt.number = true
