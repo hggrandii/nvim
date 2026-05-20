@@ -81,3 +81,29 @@ for server, cmd in pairs(servers) do
     vim.lsp.enable(server)
   end
 end
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function(event)
+    local ft = vim.bo[event.buf].filetype
+
+    local allowed = {
+      go = true,
+      lua = true,
+      rust = true,
+      zig = true,
+      c = true,
+      cpp = true,
+      dart = true,
+      python = true,
+    }
+
+    if not allowed[ft] then
+      return
+    end
+
+    vim.lsp.buf.format({
+      bufnr = event.buf,
+      timeout_ms = 2000,
+    })
+  end,
+})

@@ -83,3 +83,16 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType" }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "snacks_picker_input",
+    "snacks_picker_list",
+    "snacks_picker_preview",
+    "snacks_explorer",
+    "dashboard",
+  },
+  callback = function()
+    vim.opt_local.autocomplete = false
+  end,
+})
