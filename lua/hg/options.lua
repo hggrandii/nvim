@@ -39,7 +39,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 opt.updatetime = 250
-opt.timeoutlen = 400
+opt.timeoutlen = 300
 
 opt.undofile = true
 

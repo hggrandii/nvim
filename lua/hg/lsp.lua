@@ -74,6 +74,7 @@ local servers = {
   zls = "zls",
   ruff = "ruff",
   dartls = "dart",
+  sourcekit = "xcrun",
 }
 
 for server, cmd in pairs(servers) do
@@ -103,7 +104,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
     vim.lsp.buf.format({
       bufnr = event.buf,
-      timeout_ms = 2000,
+      timeout_ms = 3000,
     })
   end,
 })

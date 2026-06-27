@@ -3,8 +3,8 @@ vim.g.maplocalleader = " "
 
 local keymap = vim.keymap
 
-keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
-keymap.set("i", "kj", "<Esc>", { desc = "Exit insert mode" })
+-- keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+-- keymap.set("i", "kj", "<Esc>", { desc = "Exit insert mode" })
 keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
 
 keymap.set("n", "<leader>nh", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
