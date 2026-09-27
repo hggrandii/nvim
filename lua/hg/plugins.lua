@@ -1,14 +1,29 @@
-vim.pack.add({
-  { src = "https://github.com/folke/snacks.nvim" },
-  { src = "https://github.com/EdenEast/nightfox.nvim" },
-  { src = "https://github.com/windwp/nvim-autopairs" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-  { src = "https://github.com/christoomey/vim-tmux-navigator" },
-  { src = "https://github.com/kylechui/nvim-surround" },
+-- vim.pack.add({
+--   { src = "https://github.com/folke/snacks.nvim" },
+--   { src = "https://github.com/EdenEast/nightfox.nvim" },
+--   { src = "https://github.com/windwp/nvim-autopairs" },
+--   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+--   { src = "https://github.com/christoomey/vim-tmux-navigator" },
+--   { src = "https://github.com/kylechui/nvim-surround" },
+-- })
+
+for _, name in ipairs({
+  "snacks.nvim",
+  "nightfox.nvim",
+  "nvim-autopairs",
+  "nvim-treesitter",
+  "vim-tmux-navigator",
+  "nvim-surround",
+}) do
+  vim.cmd.packadd(name)
+end
+
+
+-- require("nvim-treesitter").setup()
+
+require("nvim-treesitter").setup({
+  install_dir = vim.fn.stdpath("config") .. "/site",
 })
-
-
-require("nvim-treesitter").setup()
 
 require("nvim-surround").setup()
 
