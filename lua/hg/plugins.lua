@@ -14,6 +14,7 @@ for _, name in ipairs({
   "nvim-treesitter",
   "vim-tmux-navigator",
   "nvim-surround",
+  "mini.icons",
 }) do
   vim.cmd.packadd(name)
 end
@@ -31,6 +32,8 @@ require("nvim-autopairs").setup({
   check_ts = false,
   disable_filetype = { "snacks_picker_input" },
 })
+
+require("mini.icons").setup()
 
 require("snacks").setup({
   explorer = {

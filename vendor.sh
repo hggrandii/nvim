@@ -13,6 +13,7 @@ plugins=(
   "nvim-treesitter     https://github.com/nvim-treesitter/nvim-treesitter  main"
   "vim-tmux-navigator  https://github.com/christoomey/vim-tmux-navigator   -"
   "nvim-surround       https://github.com/kylechui/nvim-surround           -"
+  "mini.icons          https://github.com/nvim-mini/mini.icons             -"
 )
 
 mkdir -p "$dest"
