@@ -32,6 +32,18 @@ require("snacks").setup({
         auto_close = true,
         jump = { close = true },
         layout = { preset = "sidebar" },
+        win = {
+          list = {
+            keys = {
+              ["<c-c>"] = "cancel",
+            },
+          },
+          input = {
+            keys = {
+              ["<c-c>"] = { "cancel", mode = { "i", "n" } },
+            },
+          },
+        },
       },
     },
   },
@@ -39,7 +51,14 @@ require("snacks").setup({
   dashboard = { enabled = false },
   notifier = { enabled = false },
   indent = { enabled = false },
-  input = { enabled = false },
+  input = {
+    enabled = false,
+    win = {
+      keys = {
+        i_ctrl_c = { "<c-c>", "cancel", mode = { "i", "n" } },
+      },
+    },
+  },
 })
 
 local function make_transparent()
@@ -87,25 +106,11 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local parsers = {
-  "go",
-  "gomod",
-  "lua",
-  "rust",
-  "zig",
-  "c",
-  "cpp",
-  "dart",
-  "python",
-  "javascript",
-  "typescript",
-  "tsx",
-  "json",
-  "yaml",
-  "toml",
-  "bash",
-  "markdown",
-  "html",
-  "css",
+  "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
+
+  "go", "gomod", "rust", "zig", "cpp", "dart", "python",
+  "javascript", "typescript", "tsx", "json", "yaml", "toml",
+  "bash", "html", "css",
 }
 
 vim.api.nvim_create_user_command("TSMine", function()

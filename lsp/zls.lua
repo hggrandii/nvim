@@ -1,5 +1,5 @@
 return {
   cmd = { "zls" },
   filetypes = { "zig", "zir" },
-  root_markers = { "build.zig", "build.zig.zon" },
+  root_markers = { "zls.json", "build.zig", ".git" },
 }

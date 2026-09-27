@@ -1,15 +1,14 @@
 return {
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
-  root_markers = { "go.work", "go.mod" },
-  capabilities = {
-    workspace = {
-      didChangeWatchedFiles = { dynamicRegistration = false },
-    },
-  },
+  root_markers = { "go.work", "go.mod", ".git" },
   settings = {
     gopls = {
-      directoryFilters = { "-node_modules", "-.git", "-vendor" },
+      gofumpt = true,
+      staticcheck = true,
+      usePlaceholders = true,
+      completeUnimported = true,
+      analyses = { unusedparams = true },
     },
   },
 }
