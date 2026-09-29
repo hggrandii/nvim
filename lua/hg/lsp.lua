@@ -66,20 +66,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-local servers = {
-  clangd = "clangd",
-  gopls = "gopls",
-  lua_ls = "lua-language-server",
-  rust_analyzer = "rust-analyzer",
-  zls = "zls",
-  ruff = "ruff",
-  dartls = "dart",
-  sourcekit = "xcrun",
-}
-
-for server, cmd in pairs(servers) do
-  if vim.fn.executable(cmd) == 1 then
-    vim.lsp.enable(server)
+for _, path in ipairs(vim.fn.glob(vim.fn.stdpath("config") .. "/lsp/*.lua", true, true)) do
+  local name = vim.fn.fnamemodify(path, ":t:r")
+  local cfg = vim.lsp.config[name]
+  local cmd = cfg and cfg.cmd
+  if type(cmd) == "table" and vim.fn.executable(cmd[1]) == 1 then
+    vim.lsp.enable(name)
   end
 end
 
@@ -108,27 +100,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     })
   end,
 })
-
--- vim.api.nvim_create_autocmd("BufWritePre", {
---   callback = function(event)
---     local allowed = {
---       go = true,
---       lua = true,
---       rust = true,
---       zig = true,
---       c = true,
---       cpp = true,
---       dart = true,
---       python = true,
---     }
---
---     if not allowed[vim.bo[event.buf].filetype] then
---       return
---     end
---
---     vim.lsp.buf.format({
---       bufnr = event.buf,
---       timeout_ms = 3000,
---     })
---   end,
--- })
