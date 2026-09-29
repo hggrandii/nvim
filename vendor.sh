@@ -37,4 +37,10 @@ done
 plat="$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)"
 echo "building parsers -> site/$plat"
 nvim --headless "+TSUpdateMine" +qa
+
+# nvim-treesitter writes absolute symlinks; make them relative so the repo is portable
+for l in "site/$plat/queries"/*; do
+  [[ -L $l ]] || continue
+  ln -sfn "../../../pack/vendor/opt/nvim-treesitter/runtime/queries/$(basename "$l")" "$l"
+done
 echo "done; run :checkhealth nvim-treesitter to verify"
