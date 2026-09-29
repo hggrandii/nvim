@@ -1,4 +1,3 @@
-vim.opt.rtp:prepend(vim.fn.stdpath("config") .. "/site")
 require("hg.options")
 require("hg.plugins")
 require("hg.keymaps")

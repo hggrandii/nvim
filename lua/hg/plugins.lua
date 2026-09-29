@@ -1,11 +1,6 @@
--- vim.pack.add({
---   { src = "https://github.com/folke/snacks.nvim" },
---   { src = "https://github.com/EdenEast/nightfox.nvim" },
---   { src = "https://github.com/windwp/nvim-autopairs" },
---   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
---   { src = "https://github.com/christoomey/vim-tmux-navigator" },
---   { src = "https://github.com/kylechui/nvim-surround" },
--- })
+local u = vim.uv.os_uname()
+local plat = vim.fn.stdpath("config") .. "/site/" .. (u.sysname .. "-" .. u.machine):lower()
+vim.opt.rtp:prepend(plat)
 
 for _, name in ipairs({
   "snacks.nvim",
@@ -19,11 +14,8 @@ for _, name in ipairs({
   vim.cmd.packadd(name)
 end
 
-
--- require("nvim-treesitter").setup()
-
 require("nvim-treesitter").setup({
-  install_dir = vim.fn.stdpath("config") .. "/site",
+  install_dir = plat,
 })
 
 require("nvim-surround").setup()
@@ -115,7 +107,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = make_transparent,
 })
 
-
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     pcall(vim.treesitter.start)
@@ -131,10 +122,12 @@ local parsers = {
   "bash", "html", "css",
 }
 
+-- Install missing parsers for this platform into site/<plat>.
 vim.api.nvim_create_user_command("TSMine", function()
   require("nvim-treesitter").install(parsers):wait(300000)
 end, {})
 
+-- Force-rebuild all of them (run after bumping nvim-treesitter).
 vim.api.nvim_create_user_command("TSUpdateMine", function()
-  vim.cmd("TSUpdate " .. table.concat(parsers, " "))
+  require("nvim-treesitter").install(parsers, { force = true }):wait(300000)
 end, {})
