@@ -1,5 +1,8 @@
 return {
-  cmd = { "xcrun", "sourcekit-lsp" },
+  cmd = { "sourcekit-lsp" },
   filetypes = { "swift" },
-  root_markers = { "Package.swift", "compile_commands.json", ".git" },
+  root_markers = { "buildServer.json", "Package.swift", "compile_commands.json", ".git" },
+  capabilities = {
+    workspace = { didChangeWatchedFiles = { dynamicRegistration = true } },
+  },
 }

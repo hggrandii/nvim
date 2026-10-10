@@ -88,6 +88,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       cpp = true,
       dart = true,
       python = true,
+      swift = true,
     }
 
     if not allowed[ft] then
