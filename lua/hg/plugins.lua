@@ -14,10 +14,6 @@ for _, name in ipairs({
   vim.cmd.packadd(name)
 end
 
-require("nvim-treesitter").setup({
-  install_dir = plat,
-})
-
 require("nvim-surround").setup()
 
 require("nvim-autopairs").setup({
@@ -108,26 +104,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  callback = function()
-    pcall(vim.treesitter.start)
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  callback = function(event)
+    if not pcall(vim.treesitter.start, event.buf) then
+      return
+    end
+    local lang = vim.treesitter.language.get_lang(vim.bo[event.buf].filetype)
+    if lang and vim.treesitter.query.get(lang, "indents") then
+      vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter.indent'.get_indent(v:lnum)"
+    end
   end,
 })
-
-local parsers = {
-  "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
-
-  "go", "gomod", "rust", "zig", "cpp", "dart", "python",
-  "javascript", "typescript", "tsx", "json", "yaml", "toml",
-  "bash", "html", "css",
-}
-
--- Install missing parsers for this platform into site/<plat>.
-vim.api.nvim_create_user_command("TSMine", function()
-  require("nvim-treesitter").install(parsers):wait(300000)
-end, {})
-
--- Force-rebuild all of them (run after bumping nvim-treesitter).
-vim.api.nvim_create_user_command("TSUpdateMine", function()
-  require("nvim-treesitter").install(parsers, { force = true }):wait(300000)
-end, {})
